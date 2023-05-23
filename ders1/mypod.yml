@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  labels:
+    app: nginx
+spec:
+  containers:
+  - name: mynginx
+    image: nginx:alpine # nginx olarak değiştirince configure ettim diyor.
+    # resources: bu olmadığı için sarı uyarı veriyor
+    #   limits:
+    #     memory: "128Mi"
+    #     cpu: "500m"
+    ports:
+      - containerPort: 80
+
+# kubectl apply -f mypod.yaml önerilen komuttur create ile tekrar komutu verdiğimizde hata verir apply ile değişiklik varsa düzenler ve değişikliği sağlar.

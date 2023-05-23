@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops
+  labels:
+    app: container-info
+  annotations:
+      kubernetes.io/change-cause: kubectl set image deploy devops-deploy container-info=gluobe/container-info:variable
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: container-info
+  template:
+    metadata:
+      labels:
+        app: container-info
+    spec:
+      containers:
+        - name: container-info
+          image: gluobe/container-info:variable
+          ports:
+            - containerPort: 80
+    
