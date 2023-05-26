@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: liveness-http
+spec:
+  containers:
+  - name: http
+    image: nginx
+    ports:
+      - containerPort: 80
+    livenessProbe:
+      httpGet:  # eğer bu container http'den yayın yapıyorsa healthcheck işlemi yapmak için httpget kullanıyoruz.
+        path: /main
+        port: 80 # container hangi portta yayın yapıyorsa o port no yazılmalı.
+      initialDelaySeconds: 10 # container başlarken 10 sn sonra healtcheck işlemine başla diyoruz.
+      timeoutSeconds: 2 # 2 sn  cevap bekle ve cevap yoksa unhealty olarak işaretle.
+      periodSeconds: 5 # kaç sn de bir control yapacak onu belirtiyoruz.
+#iki method vardır biri httpget diğeri exec komutu.

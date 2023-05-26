@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: readiness-exec
+spec:
+  containers:
+  - name: readiness
+    image: mysql
+    command: ['sh','-c','echo Hi, Kube! && sleep 3600']
+    readinessProbe:
+      exec:
+        command: ['sh','-c','echo Hi, Kube!'] # container içinde bu komut çalışıyrosa container ayaktadır.
+      initialDelaySeconds: 10 # ilk kontrölü 10 sn sonra yapmaya başla.
+      timeoutSeconds: 2 # 2 sn sonra dönüş yoksa containerı sil.
+      periodSeconds: 15 # 15 sn de bir healthcheck yap.
+
