@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: web-pv
+  labels:
+    app: web-pv
+spec:
+  capacity:
+    storage: 3Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: slow
+  hostPath:
+    path: /tmp/pv-data
+
+
+

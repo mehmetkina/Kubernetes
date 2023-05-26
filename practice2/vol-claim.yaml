@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nginx-pvc
+spec:
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: slow
+  accessModes:
+    - ReadWriteOnce
+  selector:
+    matchLabels: 
+      app: web-pv
